@@ -1,0 +1,3028 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Reusable Django + DRF engine for fingerprint attendance (ZKTeco ADMS/Push, pull, enrollment, sync, punches)">
+      
+      
+        <meta name="author" content="Ifeanyi Nnamani">
+      
+      
+        <link rel="canonical" href="https://nzestan.github.io/Fingerprint-Attendance/configuration/">
+      
+      
+        <link rel="prev" href="../testing/">
+      
+      
+        <link rel="next" href="../checks/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Configuration - django-fingerprint-attendance</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#configuration-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="django-fingerprint-attendance" class="md-header__button md-logo" aria-label="django-fingerprint-attendance" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            django-fingerprint-attendance
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configuration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/NzeStan/Fingerprint-Attendance" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    NzeStan/Fingerprint-Attendance
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="django-fingerprint-attendance" class="md-nav__button md-logo" aria-label="django-fingerprint-attendance" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    django-fingerprint-attendance
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/NzeStan/Fingerprint-Attendance" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    NzeStan/Fingerprint-Attendance
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../adms-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADMS device setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pull-mode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pull mode
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enrollment & desktop agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../offline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Offline operation & catch-up
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../calendar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendar, holidays & schedules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REST API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Signals, hooks, webhooks, realtime
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extending/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extending
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing with the simulator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#device-pin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Device PIN
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ADMS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pull" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pull
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enrollment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enrollment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Templates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sync
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#punches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Punches
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Processing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calendar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calendar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Time
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tasks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#devices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Devices
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#realtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Realtime
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#webhooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Webhooks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hooks
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../checks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System checks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocol notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Management commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Operations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security & privacy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upgrading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrading
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release checklist
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#device-pin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Device PIN
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ADMS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pull" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pull
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enrollment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enrollment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Templates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sync
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#punches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Punches
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Processing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calendar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calendar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Time
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tasks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#devices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Devices
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#realtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Realtime
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#webhooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Webhooks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hooks
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="configuration-reference">Configuration reference<a class="headerlink" href="#configuration-reference" title="Permanent link">&para;</a></h1>
+<!-- Generated by scripts/gen_settings_docs.py from fingerprint_attendance/conf.py. Do not edit. -->
+
+<p>Every setting resolves in this order:</p>
+<ol>
+<li><code>FINGERPRINT_ATTENDANCE = {...}</code> in your Django settings</li>
+<li>an environment variable <code>FPA_&lt;NAME&gt;</code></li>
+<li>the default below</li>
+</ol>
+<p>Environment values are cast to the setting's type:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Environment format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bool</td>
+<td><code>1/0</code>, <code>true/false</code>, <code>yes/no</code>, <code>on/off</code></td>
+</tr>
+<tr>
+<td>int / float</td>
+<td>number</td>
+</tr>
+<tr>
+<td>list</td>
+<td>comma separated (<code>a,b</code>) or JSON array</td>
+</tr>
+<tr>
+<td>int list</td>
+<td>comma separated integers or JSON array</td>
+</tr>
+<tr>
+<td>dict / json</td>
+<td>JSON</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>seconds (<code>90</code>), <code>90s</code>, <code>15m</code>, <code>2h</code>, <code>7d</code>, <code>1w</code>, <code>HH:MM:SS</code> or ISO 8601</td>
+</tr>
+<tr>
+<td>time</td>
+<td><code>HH:MM[:SS]</code></td>
+</tr>
+<tr>
+<td>path</td>
+<td>dotted import path, or one of the listed aliases</td>
+</tr>
+</tbody>
+</table>
+<p>Nullable settings accept <code>none</code>/<code>null</code>/empty in the environment. Settings naming a class or
+function take a dotted path, so you can swap in your own implementation. Values are validated
+by Django system checks at startup (IDs <code>fpa.E0xx</code> / <code>fpa.W0xx</code>, see <a href="../checks/">System checks</a>).</p>
+<h2 id="identity">Identity<a class="headerlink" href="#identity" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EMPLOYEE_MODEL</code></td>
+<td><code>FPA_EMPLOYEE_MODEL</code></td>
+<td>str</td>
+<td><code>settings.AUTH_USER_MODEL</code></td>
+<td>Model enrollees link to (<code>app_label.Model</code>). Set before the first migrate, like <code>AUTH_USER_MODEL</code>.</td>
+</tr>
+<tr>
+<td><code>EMPLOYEE_DISPLAY_FIELD</code></td>
+<td><code>FPA_EMPLOYEE_DISPLAY_FIELD</code></td>
+<td>str (nullable)</td>
+<td><code>None</code></td>
+<td>Employee attribute used as the name sent to devices (<code>__</code> traverses relations), or a dotted path to <code>callable(employee) -&gt; str</code>. <code>None</code> uses <code>get_full_name()</code>/<code>str()</code>.</td>
+</tr>
+<tr>
+<td><code>EMPLOYEE_LOOKUP_FIELD</code></td>
+<td><code>FPA_EMPLOYEE_LOOKUP_FIELD</code></td>
+<td>str</td>
+<td><code>'pk'</code></td>
+<td>Employee field the API accepts to identify an employee when creating enrollees.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="device-pin">Device PIN<a class="headerlink" href="#device-pin" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PIN_GENERATOR</code></td>
+<td><code>FPA_PIN_GENERATOR</code></td>
+<td>path</td>
+<td><code>'sequential'</code></td>
+<td><code>callable(employee) -&gt; str</code> producing a device PIN. Aliases: <code>sequential</code>, <code>employee_field</code>. Aliases: <code>sequential</code>, <code>employee_field</code>.</td>
+</tr>
+<tr>
+<td><code>PIN_SOURCE_FIELD</code></td>
+<td><code>FPA_PIN_SOURCE_FIELD</code></td>
+<td>str (nullable)</td>
+<td><code>None</code></td>
+<td>Employee field used by the <code>employee_field</code> PIN generator (defaults to <code>EMPLOYEE_LOOKUP_FIELD</code>).</td>
+</tr>
+<tr>
+<td><code>PIN_START</code></td>
+<td><code>FPA_PIN_START</code></td>
+<td>int</td>
+<td><code>1</code></td>
+<td>First PIN issued by the sequential generator.</td>
+</tr>
+<tr>
+<td><code>PIN_MAX_LENGTH</code></td>
+<td><code>FPA_PIN_MAX_LENGTH</code></td>
+<td>int</td>
+<td><code>9</code></td>
+<td>Maximum PIN length accepted by your devices (many ZKTeco models: 9 digits).</td>
+</tr>
+<tr>
+<td><code>PIN_NUMERIC_ONLY</code></td>
+<td><code>FPA_PIN_NUMERIC_ONLY</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Reject PINs that are not all digits.</td>
+</tr>
+<tr>
+<td><code>PIN_REUSE_ALLOWED</code></td>
+<td><code>FPA_PIN_REUSE_ALLOWED</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>Allow a PIN of a deleted enrollee to be issued again. When false, retired PINs are remembered so old punches are never attributed to a new person.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="adms">ADMS<a class="headerlink" href="#adms" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ADMS_ENABLED</code></td>
+<td><code>FPA_ADMS_ENABLED</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Serve the ADMS/Push endpoints.</td>
+</tr>
+<tr>
+<td><code>ADMS_URL_PREFIX</code></td>
+<td><code>FPA_ADMS_URL_PREFIX</code></td>
+<td>str</td>
+<td><code>'iclock/'</code></td>
+<td>URL prefix the devices call (set the device's server path accordingly).</td>
+</tr>
+<tr>
+<td><code>ADMS_AUTO_REGISTER_DEVICES</code></td>
+<td><code>FPA_ADMS_AUTO_REGISTER_DEVICES</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Create a Device row when an unknown serial number connects.</td>
+</tr>
+<tr>
+<td><code>ADMS_REQUIRE_DEVICE_APPROVAL</code></td>
+<td><code>FPA_ADMS_REQUIRE_DEVICE_APPROVAL</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Auto-registered devices start as <code>pending_approval</code>; their data is refused (and kept on the device) until approved.</td>
+</tr>
+<tr>
+<td><code>ADMS_ALLOWED_IPS</code></td>
+<td><code>FPA_ADMS_ALLOWED_IPS</code></td>
+<td>list</td>
+<td><code>[]</code></td>
+<td>IP addresses / CIDR networks allowed to call ADMS endpoints (empty = any).</td>
+</tr>
+<tr>
+<td><code>ADMS_TRUSTED_PROXY_IPS</code></td>
+<td><code>FPA_ADMS_TRUSTED_PROXY_IPS</code></td>
+<td>list</td>
+<td><code>[]</code></td>
+<td>Reverse proxies whose <code>X-Forwarded-For</code> header is trusted for the device IP.</td>
+</tr>
+<tr>
+<td><code>ADMS_DEVICE_TOKEN_REQUIRED</code></td>
+<td><code>FPA_ADMS_DEVICE_TOKEN_REQUIRED</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>Require a per-device token (query param, <code>X-FPA-Device-Token</code> header or <code>pushcommkey</code>).</td>
+</tr>
+<tr>
+<td><code>ADMS_TOKEN_PARAM</code></td>
+<td><code>FPA_ADMS_TOKEN_PARAM</code></td>
+<td>str</td>
+<td><code>'token'</code></td>
+<td>Query parameter carrying the device token.</td>
+</tr>
+<tr>
+<td><code>ADMS_ERROR_DELAY</code></td>
+<td><code>FPA_ADMS_ERROR_DELAY</code></td>
+<td>int</td>
+<td><code>30</code></td>
+<td>Handshake <code>ErrorDelay</code> (seconds between retries).</td>
+</tr>
+<tr>
+<td><code>ADMS_DELAY</code></td>
+<td><code>FPA_ADMS_DELAY</code></td>
+<td>int</td>
+<td><code>10</code></td>
+<td>Handshake <code>Delay</code> (seconds between <code>getrequest</code> polls).</td>
+</tr>
+<tr>
+<td><code>ADMS_TRANS_TIMES</code></td>
+<td><code>FPA_ADMS_TRANS_TIMES</code></td>
+<td>str</td>
+<td><code>'00:00;14:05'</code></td>
+<td>Handshake <code>TransTimes</code>.</td>
+</tr>
+<tr>
+<td><code>ADMS_TRANS_INTERVAL</code></td>
+<td><code>FPA_ADMS_TRANS_INTERVAL</code></td>
+<td>int</td>
+<td><code>1</code></td>
+<td>Handshake <code>TransInterval</code> (minutes).</td>
+</tr>
+<tr>
+<td><code>ADMS_TRANS_FLAG</code></td>
+<td><code>FPA_ADMS_TRANS_FLAG</code></td>
+<td>str</td>
+<td><code>'TransData AttLog\tOpLog\tEnrollUser\tChgUser\tEnrollFP\tChgFP'</code></td>
+<td>Handshake <code>TransFlag</code> (which data the device uploads).</td>
+</tr>
+<tr>
+<td><code>ADMS_REALTIME</code></td>
+<td><code>FPA_ADMS_REALTIME</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Handshake <code>Realtime</code> (upload punches immediately).</td>
+</tr>
+<tr>
+<td><code>ADMS_ENCRYPT</code></td>
+<td><code>FPA_ADMS_ENCRYPT</code></td>
+<td>str</td>
+<td><code>'None'</code></td>
+<td>Handshake <code>Encrypt</code> value.</td>
+</tr>
+<tr>
+<td><code>ADMS_TIMEZONE_OPTION</code></td>
+<td><code>FPA_ADMS_TIMEZONE_OPTION</code></td>
+<td>int (nullable)</td>
+<td><code>None</code></td>
+<td>Force the handshake <code>TimeZone</code> value; <code>None</code> computes it from the device timezone.</td>
+</tr>
+<tr>
+<td><code>ADMS_SERVER_VERSION</code></td>
+<td><code>FPA_ADMS_SERVER_VERSION</code></td>
+<td>str</td>
+<td><code>'2.4.1'</code></td>
+<td><code>ServerVer</code> reported in the handshake.</td>
+</tr>
+<tr>
+<td><code>ADMS_PUSH_PROTOCOL_VERSION</code></td>
+<td><code>FPA_ADMS_PUSH_PROTOCOL_VERSION</code></td>
+<td>str</td>
+<td><code>'2.4.1'</code></td>
+<td><code>PushProtVer</code> reported in the handshake.</td>
+</tr>
+<tr>
+<td><code>ADMS_HANDSHAKE_EXTRA_OPTIONS</code></td>
+<td><code>FPA_ADMS_HANDSHAKE_EXTRA_OPTIONS</code></td>
+<td>dict</td>
+<td><code>{}</code></td>
+<td>Extra <code>key=value</code> lines appended to every handshake (device <code>options</code> override these).</td>
+</tr>
+<tr>
+<td><code>ADMS_MAX_COMMANDS_PER_REQUEST</code></td>
+<td><code>FPA_ADMS_MAX_COMMANDS_PER_REQUEST</code></td>
+<td>int</td>
+<td><code>20</code></td>
+<td>Maximum commands handed out per <code>getrequest</code>.</td>
+</tr>
+<tr>
+<td><code>ADMS_PROTOCOL_ADAPTER</code></td>
+<td><code>FPA_ADMS_PROTOCOL_ADAPTER</code></td>
+<td>path</td>
+<td><code>'fingerprint_attendance.adms.adapter.ADMSProtocolAdapter'</code></td>
+<td>Class parsing/rendering the protocol. Subclass for unusual firmware (a device can also name one in <code>options['protocol_adapter']</code>).</td>
+</tr>
+<tr>
+<td><code>ADMS_MAX_REQUEST_BYTES</code></td>
+<td><code>FPA_ADMS_MAX_REQUEST_BYTES</code></td>
+<td>int</td>
+<td><code>20971520</code></td>
+<td>Maximum ADMS request body size (larger requests get HTTP 413).</td>
+</tr>
+<tr>
+<td><code>ADMS_RATE_LIMIT</code></td>
+<td><code>FPA_ADMS_RATE_LIMIT</code></td>
+<td>str (nullable)</td>
+<td><code>'600/m'</code></td>
+<td>Per-device request rate limit (<code>N/s\|m\|h</code>) using the Django cache. <code>None</code> disables.</td>
+</tr>
+<tr>
+<td><code>ADMS_BODY_ENCODINGS</code></td>
+<td><code>FPA_ADMS_BODY_ENCODINGS</code></td>
+<td>list</td>
+<td><code>['utf-8', 'gbk', 'latin-1']</code></td>
+<td>Encodings tried, in order, when decoding device uploads.</td>
+</tr>
+<tr>
+<td><code>ADMS_ACCEPT_FROM_PENDING_DEVICES</code></td>
+<td><code>FPA_ADMS_ACCEPT_FROM_PENDING_DEVICES</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>Store punches from devices awaiting approval (flagged <code>pending_device</code>) instead of refusing them.</td>
+</tr>
+<tr>
+<td><code>ADMS_STORE_OPERLOG_EVENTS</code></td>
+<td><code>FPA_ADMS_STORE_OPERLOG_EVENTS</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Store OPLOG lines as DeviceEventLog rows.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pull">Pull<a class="headerlink" href="#pull" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PULL_ENABLED</code></td>
+<td><code>FPA_PULL_ENABLED</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>Enable pull mode (requires the <code>[pull]</code> extra).</td>
+</tr>
+<tr>
+<td><code>PULL_ADAPTER</code></td>
+<td><code>FPA_PULL_ADAPTER</code></td>
+<td>path</td>
+<td><code>'fingerprint_attendance.pull.pyzk_adapter.PyZKPullAdapter'</code></td>
+<td><code>BasePullAdapter</code> subclass used to talk to devices on the LAN.</td>
+</tr>
+<tr>
+<td><code>PULL_DEFAULT_PORT</code></td>
+<td><code>FPA_PULL_DEFAULT_PORT</code></td>
+<td>int</td>
+<td><code>4370</code></td>
+<td>Default device TCP/UDP port.</td>
+</tr>
+<tr>
+<td><code>PULL_TIMEOUT</code></td>
+<td><code>FPA_PULL_TIMEOUT</code></td>
+<td>int</td>
+<td><code>10</code></td>
+<td>Connection timeout in seconds.</td>
+</tr>
+<tr>
+<td><code>PULL_COMM_KEY</code></td>
+<td><code>FPA_PULL_COMM_KEY</code></td>
+<td>int</td>
+<td><code>0</code></td>
+<td>Default device comm key (password).</td>
+</tr>
+<tr>
+<td><code>PULL_FORCE_UDP</code></td>
+<td><code>FPA_PULL_FORCE_UDP</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>Force UDP (older devices).</td>
+</tr>
+<tr>
+<td><code>PULL_POLL_INTERVAL</code></td>
+<td><code>FPA_PULL_POLL_INTERVAL</code></td>
+<td>duration</td>
+<td><code>1m</code></td>
+<td>Interval between polls for <code>fpa_pull_attendance --loop</code>.</td>
+</tr>
+<tr>
+<td><code>PULL_RECONNECT_BACKOFF_MAX</code></td>
+<td><code>FPA_PULL_RECONNECT_BACKOFF_MAX</code></td>
+<td>duration</td>
+<td><code>5m</code></td>
+<td>Maximum reconnect backoff for live capture.</td>
+</tr>
+<tr>
+<td><code>PULL_DISABLE_DEVICE_DURING_SYNC</code></td>
+<td><code>FPA_PULL_DISABLE_DEVICE_DURING_SYNC</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Lock the device keypad while bulk reading/writing.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="enrollment">Enrollment<a class="headerlink" href="#enrollment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FINGERS_REQUIRED_MIN</code></td>
+<td><code>FPA_FINGERS_REQUIRED_MIN</code></td>
+<td>int</td>
+<td><code>1</code></td>
+<td>Minimum enrolled fingers an enrollee must have when a session completes.</td>
+</tr>
+<tr>
+<td><code>FINGERS_ALLOWED_MAX</code></td>
+<td><code>FPA_FINGERS_ALLOWED_MAX</code></td>
+<td>int</td>
+<td><code>10</code></td>
+<td>Maximum fingers stored per enrollee.</td>
+</tr>
+<tr>
+<td><code>ALLOWED_FINGER_INDEXES</code></td>
+<td><code>FPA_ALLOWED_FINGER_INDEXES</code></td>
+<td>int_list</td>
+<td><code>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></td>
+<td>Finger indexes (0-9, ZKTeco numbering) that may be enrolled.</td>
+</tr>
+<tr>
+<td><code>ENROLLMENT_SESSION_TTL</code></td>
+<td><code>FPA_ENROLLMENT_SESSION_TTL</code></td>
+<td>duration</td>
+<td><code>10m</code></td>
+<td>Lifetime of an enrollment session.</td>
+</tr>
+<tr>
+<td><code>ENROLLMENT_REQUIRE_CONSENT</code></td>
+<td><code>FPA_ENROLLMENT_REQUIRE_CONSENT</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Refuse to store templates for enrollees without active consent.</td>
+</tr>
+<tr>
+<td><code>ENROLLMENT_RETRY_COUNT</code></td>
+<td><code>FPA_ENROLLMENT_RETRY_COUNT</code></td>
+<td>int</td>
+<td><code>3</code></td>
+<td><code>RETRY</code> parameter of remote enroll commands.</td>
+</tr>
+<tr>
+<td><code>ENROLLMENT_OVERWRITE</code></td>
+<td><code>FPA_ENROLLMENT_OVERWRITE</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td><code>OVERWRITE</code> parameter of remote enroll commands.</td>
+</tr>
+<tr>
+<td><code>ACCEPT_DEVICE_ENROLLMENTS</code></td>
+<td><code>FPA_ACCEPT_DEVICE_ENROLLMENTS</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Accept templates enrolled at the device (walk-up) and fan them out.</td>
+</tr>
+<tr>
+<td><code>DELETE_REJECTED_DEVICE_TEMPLATES</code></td>
+<td><code>FPA_DELETE_REJECTED_DEVICE_TEMPLATES</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>When a walk-up template is refused (no consent, finger not allowed, unknown PIN), queue its deletion on that device.</td>
+</tr>
+<tr>
+<td><code>AGENT_CAN_START_SESSIONS</code></td>
+<td><code>FPA_AGENT_CAN_START_SESSIONS</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>Allow desktop agents to open enrollment sessions themselves.</td>
+</tr>
+<tr>
+<td><code>AGENT_AUTH_SCHEME</code></td>
+<td><code>FPA_AGENT_AUTH_SCHEME</code></td>
+<td>str</td>
+<td><code>'Agent'</code></td>
+<td><code>Authorization: &lt;scheme&gt; &lt;key&gt;</code> scheme for agent requests.</td>
+</tr>
+<tr>
+<td><code>AGENT_RATE_LIMIT</code></td>
+<td><code>FPA_AGENT_RATE_LIMIT</code></td>
+<td>str (nullable)</td>
+<td><code>'120/m'</code></td>
+<td>Per-agent request rate limit.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="templates">Templates<a class="headerlink" href="#templates" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TEMPLATE_ENCRYPTION_ENABLED</code></td>
+<td><code>FPA_TEMPLATE_ENCRYPTION_ENABLED</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Encrypt templates at rest.</td>
+</tr>
+<tr>
+<td><code>TEMPLATE_ENCRYPTION_KEYS</code></td>
+<td><code>FPA_TEMPLATE_ENCRYPTION_KEYS</code></td>
+<td>list</td>
+<td><code>[]</code></td>
+<td>Fernet keys, newest first. Old keys still decrypt (rotation); run <code>fpa_rotate_template_keys</code> after adding a key.</td>
+</tr>
+<tr>
+<td><code>TEMPLATE_STORAGE_BACKEND</code></td>
+<td><code>FPA_TEMPLATE_STORAGE_BACKEND</code></td>
+<td>path</td>
+<td><code>'fingerprint_attendance.crypto.DatabaseTemplateStorage'</code></td>
+<td>Class storing template bytes (e.g. to use an external vault).</td>
+</tr>
+<tr>
+<td><code>EXPOSE_TEMPLATE_DATA_IN_API</code></td>
+<td><code>FPA_EXPOSE_TEMPLATE_DATA_IN_API</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>Allow the API to return template bytes to callers holding the <code>view_template_data</code> permission.</td>
+</tr>
+<tr>
+<td><code>ALGORITHM_COMPATIBILITY_MAP</code></td>
+<td><code>FPA_ALGORITHM_COMPATIBILITY_MAP</code></td>
+<td>dict</td>
+<td><code>{}</code></td>
+<td><code>{device_algorithm: [template_algorithms...]}</code>. Unlisted devices accept only their own algorithm.</td>
+</tr>
+<tr>
+<td><code>DEFAULT_ALGORITHM_VERSION</code></td>
+<td><code>FPA_DEFAULT_ALGORITHM_VERSION</code></td>
+<td>str</td>
+<td><code>'10'</code></td>
+<td>Algorithm assumed when a device does not report one.</td>
+</tr>
+<tr>
+<td><code>SYNC_TO_UNKNOWN_ALGORITHM_DEVICES</code></td>
+<td><code>FPA_SYNC_TO_UNKNOWN_ALGORITHM_DEVICES</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Push templates to devices that never reported an algorithm version.</td>
+</tr>
+<tr>
+<td><code>TEMPLATE_MAX_BYTES</code></td>
+<td><code>FPA_TEMPLATE_MAX_BYTES</code></td>
+<td>int</td>
+<td><code>65536</code></td>
+<td>Largest template accepted.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sync">Sync<a class="headerlink" href="#sync" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SYNC_STRATEGY</code></td>
+<td><code>FPA_SYNC_STRATEGY</code></td>
+<td>path</td>
+<td><code>'all'</code></td>
+<td>Which devices receive an enrollee. Aliases <code>all</code>, <code>groups</code>, or a dotted path to <code>callable(enrollee) -&gt; QuerySet[Device]</code> or a <code>BaseSyncStrategy</code> subclass. Aliases: <code>all</code>, <code>groups</code>.</td>
+</tr>
+<tr>
+<td><code>SYNC_UNGROUPED_TO_ALL</code></td>
+<td><code>FPA_SYNC_UNGROUPED_TO_ALL</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>With the <code>groups</code> strategy, send enrollees without groups to every device.</td>
+</tr>
+<tr>
+<td><code>SYNC_ON_ENROLL</code></td>
+<td><code>FPA_SYNC_ON_ENROLL</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Fan templates out when stored.</td>
+</tr>
+<tr>
+<td><code>SYNC_ON_DELETE</code></td>
+<td><code>FPA_SYNC_ON_DELETE</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Queue device deletes on deactivation, deletion or consent withdrawal.</td>
+</tr>
+<tr>
+<td><code>SYNC_ON_DEVICE_APPROVAL</code></td>
+<td><code>FPA_SYNC_ON_DEVICE_APPROVAL</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Backfill all in-scope enrollees onto a newly approved device.</td>
+</tr>
+<tr>
+<td><code>SYNC_USERS_WITHOUT_TEMPLATES</code></td>
+<td><code>FPA_SYNC_USERS_WITHOUT_TEMPLATES</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>Push the user record to devices even before any template exists.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>COMMAND_MAX_RETRIES</code></td>
+<td><code>FPA_COMMAND_MAX_RETRIES</code></td>
+<td>int</td>
+<td><code>5</code></td>
+<td>Retries for a failed or unacknowledged command.</td>
+</tr>
+<tr>
+<td><code>COMMAND_RETRY_BACKOFF</code></td>
+<td><code>FPA_COMMAND_RETRY_BACKOFF</code></td>
+<td>duration</td>
+<td><code>1m</code></td>
+<td>Base retry delay (doubles per attempt).</td>
+</tr>
+<tr>
+<td><code>COMMAND_RETRY_BACKOFF_MAX</code></td>
+<td><code>FPA_COMMAND_RETRY_BACKOFF_MAX</code></td>
+<td>duration</td>
+<td><code>1h</code></td>
+<td>Maximum retry delay.</td>
+</tr>
+<tr>
+<td><code>COMMAND_ACK_TIMEOUT</code></td>
+<td><code>FPA_COMMAND_ACK_TIMEOUT</code></td>
+<td>duration</td>
+<td><code>15m</code></td>
+<td>A sent command without a result after this long is retried.</td>
+</tr>
+<tr>
+<td><code>COMMAND_EXPIRY</code></td>
+<td><code>FPA_COMMAND_EXPIRY</code></td>
+<td>dict</td>
+<td><code>{'reboot': '1h', 'set_time': '1h', 'enroll_fingerprint': '30m', 'check': '1h', 'info': '1h', 'clear_logs': '1d', 'clear_data': '1d'}</code></td>
+<td>Per command type expiry (duration or <code>None</code>). Key <code>default</code> applies to unlisted types; template/user adds and deletes never expire unless listed.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="punches">Punches<a class="headerlink" href="#punches" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DEDUPE_WINDOW_SECONDS</code></td>
+<td><code>FPA_DEDUPE_WINDOW_SECONDS</code></td>
+<td>int</td>
+<td><code>60</code></td>
+<td>Repeat punches by the same PIN within this window are soft duplicates (0 disables).</td>
+</tr>
+<tr>
+<td><code>DEDUPE_WINDOW_ACTION</code></td>
+<td><code>FPA_DEDUPE_WINDOW_ACTION</code></td>
+<td>str</td>
+<td><code>'flag'</code></td>
+<td><code>flag</code> stores soft duplicates with the <code>duplicate</code> flag (excluded from processing, keeps device/server counts reconcilable); <code>skip</code> drops them.</td>
+</tr>
+<tr>
+<td><code>DEDUPE_KEY_BUILDER</code></td>
+<td><code>FPA_DEDUPE_KEY_BUILDER</code></td>
+<td>path</td>
+<td><code>'fingerprint_attendance.ingestion.dedupe.default_dedupe_key'</code></td>
+<td><code>callable(candidate) -&gt; str</code> building the exact-duplicate key.</td>
+</tr>
+<tr>
+<td><code>PUNCH_STATE_RESOLVER</code></td>
+<td><code>FPA_PUNCH_STATE_RESOLVER</code></td>
+<td>path</td>
+<td><code>'trust_device'</code></td>
+<td>Resolves check-in/out. Aliases <code>trust_device</code>, <code>alternate</code>, <code>first_last</code> or a <code>BasePunchStateResolver</code> subclass path. Aliases: <code>trust_device</code>, <code>alternate</code>, <code>first_last</code>.</td>
+</tr>
+<tr>
+<td><code>PUNCH_STATE_MAP</code></td>
+<td><code>FPA_PUNCH_STATE_MAP</code></td>
+<td>dict</td>
+<td><code>{'0': 'check_in', '1': 'check_out', '2': 'break_out', '3': 'break_in', '4': 'overtime_in', '5': 'overtime_out'}</code></td>
+<td>Device status code -&gt; punch state (used by <code>trust_device</code>).</td>
+</tr>
+<tr>
+<td><code>ACCEPT_UNKNOWN_PIN_PUNCHES</code></td>
+<td><code>FPA_ACCEPT_UNKNOWN_PIN_PUNCHES</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Store punches whose PIN matches no enrollee (flagged <code>unknown_pin</code>).</td>
+</tr>
+<tr>
+<td><code>LINK_UNKNOWN_PUNCHES_ON_ENROLL</code></td>
+<td><code>FPA_LINK_UNKNOWN_PUNCHES_ON_ENROLL</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Attach earlier unknown-PIN punches when an enrollee with that PIN is created.</td>
+</tr>
+<tr>
+<td><code>FUTURE_PUNCH_TOLERANCE</code></td>
+<td><code>FPA_FUTURE_PUNCH_TOLERANCE</code></td>
+<td>duration</td>
+<td><code>5m</code></td>
+<td>Punches later than <code>received_at</code> + this are flagged <code>future</code>.</td>
+</tr>
+<tr>
+<td><code>CLOCK_DRIFT_WARNING_SECONDS</code></td>
+<td><code>FPA_CLOCK_DRIFT_WARNING_SECONDS</code></td>
+<td>int</td>
+<td><code>120</code></td>
+<td>Device clock drift above this is flagged and signalled.</td>
+</tr>
+<tr>
+<td><code>LATE_SYNC_THRESHOLD</code></td>
+<td><code>FPA_LATE_SYNC_THRESHOLD</code></td>
+<td>duration</td>
+<td><code>15m</code></td>
+<td>Punches received later than this after they happened are flagged <code>late_sync</code>.</td>
+</tr>
+<tr>
+<td><code>BACKLOG_SIGNAL_THRESHOLD</code></td>
+<td><code>FPA_BACKLOG_SIGNAL_THRESHOLD</code></td>
+<td>int</td>
+<td><code>20</code></td>
+<td>Batches with at least this many new punches (or any late ones) emit <code>backlog_synced</code>.</td>
+</tr>
+<tr>
+<td><code>PUNCH_BULK_CHUNK_SIZE</code></td>
+<td><code>FPA_PUNCH_BULK_CHUNK_SIZE</code></td>
+<td>int</td>
+<td><code>1000</code></td>
+<td>Rows per <code>bulk_create</code> call.</td>
+</tr>
+<tr>
+<td><code>PUNCH_EVENT_BATCH_LIMIT</code></td>
+<td><code>FPA_PUNCH_EVENT_BATCH_LIMIT</code></td>
+<td>int (nullable)</td>
+<td><code>1000</code></td>
+<td>Batches larger than this emit only batch-level events (<code>punches_received</code>, <code>backlog_synced</code>) instead of one <code>punch_received</code> per punch. <code>None</code> = no limit.</td>
+</tr>
+<tr>
+<td><code>AUTO_CORRECT_DEVICE_TIME</code></td>
+<td><code>FPA_AUTO_CORRECT_DEVICE_TIME</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>Queue a set-time command when drift exceeds the warning threshold.</td>
+</tr>
+<tr>
+<td><code>MAX_AUTO_TIME_CORRECTION</code></td>
+<td><code>FPA_MAX_AUTO_TIME_CORRECTION</code></td>
+<td>duration</td>
+<td><code>1h</code></td>
+<td>Larger drifts are only reported, never corrected automatically.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="processing">Processing<a class="headerlink" href="#processing" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ATTENDANCE_PROCESSOR</code></td>
+<td><code>FPA_ATTENDANCE_PROCESSOR</code></td>
+<td>path (nullable)</td>
+<td><code>'fingerprint_attendance.processing.default.FirstInLastOutProcessor'</code></td>
+<td><code>BaseAttendanceProcessor</code> subclass; <code>None</code> disables processing entirely.</td>
+</tr>
+<tr>
+<td><code>PROCESS_ON_INGEST</code></td>
+<td><code>FPA_PROCESS_ON_INGEST</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Recompute affected days after punches are ingested (via the task backend).</td>
+</tr>
+<tr>
+<td><code>DAY_BOUNDARY_RESOLVER</code></td>
+<td><code>FPA_DAY_BOUNDARY_RESOLVER</code></td>
+<td>path</td>
+<td><code>'calendar_day'</code></td>
+<td>Maps a punch to a work date. Aliases <code>calendar_day</code>, <code>offset</code> (uses <code>DAY_START_TIME</code>), <code>shift_aware</code> (overnight shifts from the schedule provider). Aliases: <code>calendar_day</code>, <code>offset</code>, <code>shift_aware</code>.</td>
+</tr>
+<tr>
+<td><code>DAY_START_TIME</code></td>
+<td><code>FPA_DAY_START_TIME</code></td>
+<td>time</td>
+<td><code>00:00</code></td>
+<td>Local time a work day starts (<code>offset</code> boundary).</td>
+</tr>
+<tr>
+<td><code>ATTENDANCE_TIMEZONE</code></td>
+<td><code>FPA_ATTENDANCE_TIMEZONE</code></td>
+<td>str (nullable)</td>
+<td><code>None</code></td>
+<td>Timezone used to assign work dates; <code>None</code> uses <code>DEFAULT_DEVICE_TIMEZONE</code>.</td>
+</tr>
+<tr>
+<td><code>OVERNIGHT_SHIFT_MARGIN</code></td>
+<td><code>FPA_OVERNIGHT_SHIFT_MARGIN</code></td>
+<td>duration</td>
+<td><code>4h</code></td>
+<td><code>shift_aware</code> boundary: punches up to this long after an overnight shift ends still belong to the shift's start date.</td>
+</tr>
+<tr>
+<td><code>STATUS_RULES</code></td>
+<td><code>FPA_STATUS_RULES</code></td>
+<td>path_list</td>
+<td><code>['fingerprint_attendance.processing.rules.on_leave', 'fingerprint_attendance.processing.rules.non_working_day', 'fingerprint_attendance.processing.rules.absent', 'fingerprint_attendance.processing.rules.incomplete', 'fingerprint_attendance.processing.rules.late', 'fingerprint_attendance.processing.rules.early_leave', 'fingerprint_attendance.processing.rules.present']</code></td>
+<td>Ordered status rule callables evaluated per attendance day.</td>
+</tr>
+<tr>
+<td><code>ABSENCE_GENERATION_ENABLED</code></td>
+<td><code>FPA_ABSENCE_GENERATION_ENABLED</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Allow <code>fpa_generate_absences</code> / the periodic task to create absent days.</td>
+</tr>
+<tr>
+<td><code>ABSENCE_CUTOFF_TIME</code></td>
+<td><code>FPA_ABSENCE_CUTOFF_TIME</code></td>
+<td>time</td>
+<td><code>23:59</code></td>
+<td>Absences for a date are only generated after this local time.</td>
+</tr>
+<tr>
+<td><code>RECOMPUTE_ON_CALENDAR_CHANGE</code></td>
+<td><code>FPA_RECOMPUTE_ON_CALENDAR_CHANGE</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Recompute days when holidays, leave or schedules change.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="calendar">Calendar<a class="headerlink" href="#calendar" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CALENDAR_PROVIDER</code></td>
+<td><code>FPA_CALENDAR_PROVIDER</code></td>
+<td>path</td>
+<td><code>'fingerprint_attendance.calendar.providers.DefaultCalendarProvider'</code></td>
+<td><code>BaseCalendarProvider</code> resolving day types.</td>
+</tr>
+<tr>
+<td><code>HOLIDAY_PROVIDER</code></td>
+<td><code>FPA_HOLIDAY_PROVIDER</code></td>
+<td>path</td>
+<td><code>'chained'</code></td>
+<td><code>BaseHolidayProvider</code>. Aliases <code>chained</code>, <code>settings</code>, <code>database</code>, <code>holidays</code>. Aliases: <code>chained</code>, <code>settings</code>, <code>database</code>, <code>holidays</code>.</td>
+</tr>
+<tr>
+<td><code>HOLIDAY_PROVIDER_CHAIN</code></td>
+<td><code>FPA_HOLIDAY_PROVIDER_CHAIN</code></td>
+<td>path_list</td>
+<td><code>['database', 'settings']</code></td>
+<td>Providers combined by <code>chained</code>, highest priority first (database overrides win). Aliases: <code>settings</code>, <code>database</code>, <code>holidays</code>.</td>
+</tr>
+<tr>
+<td><code>HOLIDAYS</code></td>
+<td><code>FPA_HOLIDAYS</code></td>
+<td>json</td>
+<td><code>[]</code></td>
+<td>Static holidays: <code>[{"date": "2026-10-01", "name": "Independence Day", "recurring": true}]</code>.</td>
+</tr>
+<tr>
+<td><code>HOLIDAYS_COUNTRY</code></td>
+<td><code>FPA_HOLIDAYS_COUNTRY</code></td>
+<td>str (nullable)</td>
+<td><code>None</code></td>
+<td>Country code for the <code>holidays</code> provider (e.g. NG).</td>
+</tr>
+<tr>
+<td><code>HOLIDAYS_SUBDIVISION</code></td>
+<td><code>FPA_HOLIDAYS_SUBDIVISION</code></td>
+<td>str (nullable)</td>
+<td><code>None</code></td>
+<td>Subdivision for the <code>holidays</code> provider.</td>
+</tr>
+<tr>
+<td><code>WEEKEND_DAYS</code></td>
+<td><code>FPA_WEEKEND_DAYS</code></td>
+<td>int_list</td>
+<td><code>[5, 6]</code></td>
+<td>Weekend weekdays (Monday=0).</td>
+</tr>
+<tr>
+<td><code>WEEKEND_DAYS_BY_GROUP</code></td>
+<td><code>FPA_WEEKEND_DAYS_BY_GROUP</code></td>
+<td>dict</td>
+<td><code>{}</code></td>
+<td><code>{device_group_name: [weekdays]}</code> overrides for enrollees in that group.</td>
+</tr>
+<tr>
+<td><code>LEAVE_PROVIDER</code></td>
+<td><code>FPA_LEAVE_PROVIDER</code></td>
+<td>path</td>
+<td><code>'fingerprint_attendance.calendar.providers.NullLeaveProvider'</code></td>
+<td><code>BaseLeaveProvider</code> connecting your HR/leave system.</td>
+</tr>
+<tr>
+<td><code>SCHEDULE_PROVIDER</code></td>
+<td><code>FPA_SCHEDULE_PROVIDER</code></td>
+<td>path</td>
+<td><code>'settings'</code></td>
+<td><code>BaseScheduleProvider</code>. Aliases <code>settings</code> (<code>DEFAULT_SCHEDULE</code>), <code>database</code> (WorkSchedule/ShiftAssignment models). Aliases: <code>settings</code>, <code>database</code>.</td>
+</tr>
+<tr>
+<td><code>DEFAULT_SCHEDULE</code></td>
+<td><code>FPA_DEFAULT_SCHEDULE</code></td>
+<td>dict (nullable)</td>
+<td><code>None</code></td>
+<td>Fixed schedule, e.g. <code>{"start": "09:00", "end": "17:00", "grace_in_minutes": 10}</code>. <code>None</code> = no expected shift (no late/early statuses).</td>
+</tr>
+<tr>
+<td><code>SCHEDULE_MODELS_ENABLED</code></td>
+<td><code>FPA_SCHEDULE_MODELS_ENABLED</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>Expose WorkSchedule/ShiftAssignment in the API and admin.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="time">Time<a class="headerlink" href="#time" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DEFAULT_DEVICE_TIMEZONE</code></td>
+<td><code>FPA_DEFAULT_DEVICE_TIMEZONE</code></td>
+<td>str</td>
+<td><code>settings.TIME_ZONE</code></td>
+<td>Timezone of devices without their own (everything is stored in UTC).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tasks">Tasks<a class="headerlink" href="#tasks" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TASK_BACKEND</code></td>
+<td><code>FPA_TASK_BACKEND</code></td>
+<td>path</td>
+<td><code>'sync'</code></td>
+<td>Runs background work. Aliases <code>sync</code> (inline), <code>celery</code>, <code>django</code> (Django 6 tasks), or a <code>BaseTaskBackend</code> path. Aliases: <code>sync</code>, <code>celery</code>, <code>django</code>.</td>
+</tr>
+<tr>
+<td><code>TASK_BACKEND_OPTIONS</code></td>
+<td><code>FPA_TASK_BACKEND_OPTIONS</code></td>
+<td>dict</td>
+<td><code>{}</code></td>
+<td>Backend options (<code>queue</code> for Celery, <code>queue_name</code>/<code>backend</code> for Django tasks).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="devices">Devices<a class="headerlink" href="#devices" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DEVICE_OFFLINE_AFTER</code></td>
+<td><code>FPA_DEVICE_OFFLINE_AFTER</code></td>
+<td>duration</td>
+<td><code>5m</code></td>
+<td>A device not seen for this long is offline.</td>
+</tr>
+<tr>
+<td><code>DEFAULT_LOG_CAPACITY</code></td>
+<td><code>FPA_DEFAULT_LOG_CAPACITY</code></td>
+<td>int</td>
+<td><code>100000</code></td>
+<td>Attendance log capacity assumed when the device does not report one.</td>
+</tr>
+<tr>
+<td><code>LOG_CAPACITY_WARNING_RATIO</code></td>
+<td><code>FPA_LOG_CAPACITY_WARNING_RATIO</code></td>
+<td>float</td>
+<td><code>0.9</code></td>
+<td>Warn when a device's stored logs reach this fraction of capacity.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="realtime">Realtime<a class="headerlink" href="#realtime" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>REALTIME_BACKEND</code></td>
+<td><code>FPA_REALTIME_BACKEND</code></td>
+<td>path</td>
+<td><code>'none'</code></td>
+<td>Broadcast backend. Aliases <code>none</code>, <code>channels</code>. Aliases: <code>none</code>, <code>channels</code>.</td>
+</tr>
+<tr>
+<td><code>REALTIME_GROUP_NAME_BUILDER</code></td>
+<td><code>FPA_REALTIME_GROUP_NAME_BUILDER</code></td>
+<td>path</td>
+<td><code>'fingerprint_attendance.realtime.backends.default_group_names'</code></td>
+<td><code>callable(event, payload) -&gt; list[str]</code> of channel group names.</td>
+</tr>
+<tr>
+<td><code>REALTIME_EVENTS</code></td>
+<td><code>FPA_REALTIME_EVENTS</code></td>
+<td>list</td>
+<td><code>['punch_received', 'device_online', 'device_offline', 'backlog_synced', 'enrollment_completed', 'command_failed']</code></td>
+<td>Events broadcast to WebSocket clients.</td>
+</tr>
+<tr>
+<td><code>REALTIME_CONSUMER_PERMISSION</code></td>
+<td><code>FPA_REALTIME_CONSUMER_PERMISSION</code></td>
+<td>path</td>
+<td><code>'fingerprint_attendance.realtime.backends.staff_only'</code></td>
+<td><code>callable(scope) -&gt; bool</code> deciding who may subscribe.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="webhooks">Webhooks<a class="headerlink" href="#webhooks" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WEBHOOKS_ENABLED</code></td>
+<td><code>FPA_WEBHOOKS_ENABLED</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>Deliver events to webhook endpoints.</td>
+</tr>
+<tr>
+<td><code>WEBHOOK_SIGNING_SECRET</code></td>
+<td><code>FPA_WEBHOOK_SIGNING_SECRET</code></td>
+<td>str (nullable)</td>
+<td><code>None</code></td>
+<td>Default HMAC-SHA256 secret (endpoints may define their own).</td>
+</tr>
+<tr>
+<td><code>WEBHOOK_TIMEOUT</code></td>
+<td><code>FPA_WEBHOOK_TIMEOUT</code></td>
+<td>int</td>
+<td><code>10</code></td>
+<td>HTTP timeout (seconds).</td>
+</tr>
+<tr>
+<td><code>WEBHOOK_MAX_RETRIES</code></td>
+<td><code>FPA_WEBHOOK_MAX_RETRIES</code></td>
+<td>int</td>
+<td><code>5</code></td>
+<td>Delivery retries.</td>
+</tr>
+<tr>
+<td><code>WEBHOOK_RETRY_BACKOFF</code></td>
+<td><code>FPA_WEBHOOK_RETRY_BACKOFF</code></td>
+<td>duration</td>
+<td><code>1m</code></td>
+<td>Base retry delay (doubles per attempt).</td>
+</tr>
+<tr>
+<td><code>WEBHOOK_EVENTS</code></td>
+<td><code>FPA_WEBHOOK_EVENTS</code></td>
+<td>list</td>
+<td><code>[]</code></td>
+<td>Event allowlist (empty = every event).</td>
+</tr>
+<tr>
+<td><code>WEBHOOK_SENDER</code></td>
+<td><code>FPA_WEBHOOK_SENDER</code></td>
+<td>path</td>
+<td><code>'fingerprint_attendance.webhooks.delivery.urllib_sender'</code></td>
+<td><code>callable(url, body: bytes, headers, timeout) -&gt; (status, text)</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="api">API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>API_URL_PREFIX</code></td>
+<td><code>FPA_API_URL_PREFIX</code></td>
+<td>str</td>
+<td><code>'api/fingerprint/'</code></td>
+<td>Prefix used by <code>fingerprint_attendance.urls</code> for the REST API.</td>
+</tr>
+<tr>
+<td><code>API_URL_NAMESPACE</code></td>
+<td><code>FPA_API_URL_NAMESPACE</code></td>
+<td>str</td>
+<td><code>'fingerprint_attendance_api'</code></td>
+<td>URL namespace of the API.</td>
+</tr>
+<tr>
+<td><code>API_PERMISSION_CLASSES</code></td>
+<td><code>FPA_API_PERMISSION_CLASSES</code></td>
+<td>path_list</td>
+<td><code>['rest_framework.permissions.IsAdminUser']</code></td>
+<td>Default permission classes for every viewset.</td>
+</tr>
+<tr>
+<td><code>API_VIEWSET_PERMISSION_CLASSES</code></td>
+<td><code>FPA_API_VIEWSET_PERMISSION_CLASSES</code></td>
+<td>dict</td>
+<td><code>{}</code></td>
+<td><code>{"devices": [...], "punches.create_manual": [...]}</code> per viewset / action overrides.</td>
+</tr>
+<tr>
+<td><code>API_AUTHENTICATION_CLASSES</code></td>
+<td><code>FPA_API_AUTHENTICATION_CLASSES</code></td>
+<td>path_list (nullable)</td>
+<td><code>None</code></td>
+<td>Authentication classes (<code>None</code> = DRF defaults).</td>
+</tr>
+<tr>
+<td><code>API_PAGINATION_CLASS</code></td>
+<td><code>FPA_API_PAGINATION_CLASS</code></td>
+<td>path (nullable)</td>
+<td><code>'fingerprint_attendance.api.pagination.StandardPagination'</code></td>
+<td>Pagination class for list endpoints.</td>
+</tr>
+<tr>
+<td><code>API_PAGE_SIZE</code></td>
+<td><code>FPA_API_PAGE_SIZE</code></td>
+<td>int</td>
+<td><code>50</code></td>
+<td>Default page size.</td>
+</tr>
+<tr>
+<td><code>PUNCH_PAGINATION_CLASS</code></td>
+<td><code>FPA_PUNCH_PAGINATION_CLASS</code></td>
+<td>path (nullable)</td>
+<td><code>'fingerprint_attendance.api.pagination.PunchCursorPagination'</code></td>
+<td>Pagination class for punches (cursor based).</td>
+</tr>
+<tr>
+<td><code>API_THROTTLE_CLASSES</code></td>
+<td><code>FPA_API_THROTTLE_CLASSES</code></td>
+<td>path_list (nullable)</td>
+<td><code>None</code></td>
+<td>Throttle classes (<code>None</code> = DRF defaults).</td>
+</tr>
+<tr>
+<td><code>SERIALIZER_OVERRIDES</code></td>
+<td><code>FPA_SERIALIZER_OVERRIDES</code></td>
+<td>dict</td>
+<td><code>{}</code></td>
+<td><code>{"devices": "myapp.MyDeviceSerializer"}</code> (keys: viewset basename or <code>basename.action</code>).</td>
+</tr>
+<tr>
+<td><code>VIEWSET_OVERRIDES</code></td>
+<td><code>FPA_VIEWSET_OVERRIDES</code></td>
+<td>dict</td>
+<td><code>{}</code></td>
+<td><code>{"devices": "myapp.MyDeviceViewSet"}</code>.</td>
+</tr>
+<tr>
+<td><code>FILTERSET_OVERRIDES</code></td>
+<td><code>FPA_FILTERSET_OVERRIDES</code></td>
+<td>dict</td>
+<td><code>{}</code></td>
+<td><code>{"punches": "myapp.MyPunchFilterSet"}</code> (django-filter).</td>
+</tr>
+<tr>
+<td><code>API_FILTER_BACKEND</code></td>
+<td><code>FPA_API_FILTER_BACKEND</code></td>
+<td>str</td>
+<td><code>'auto'</code></td>
+<td><code>auto</code> (django-filter when installed), <code>django_filter</code> or <code>builtin</code>.</td>
+</tr>
+<tr>
+<td><code>API_EXCEPTION_HANDLER</code></td>
+<td><code>FPA_API_EXCEPTION_HANDLER</code></td>
+<td>path (nullable)</td>
+<td><code>'fingerprint_attendance.api.exceptions.exception_handler'</code></td>
+<td>Exception handler used by package viewsets (<code>None</code> = DRF's configured handler).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="privacy">Privacy<a class="headerlink" href="#privacy" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RETENTION_DELETE_TEMPLATES_AFTER_DEACTIVATION</code></td>
+<td><code>FPA_RETENTION_DELETE_TEMPLATES_AFTER_DEACTIVATION</code></td>
+<td>duration (nullable)</td>
+<td><code>None</code></td>
+<td>Delete stored templates this long after deactivation (<code>None</code> keeps them).</td>
+</tr>
+<tr>
+<td><code>RETENTION_PUNCHES_DAYS</code></td>
+<td><code>FPA_RETENTION_PUNCHES_DAYS</code></td>
+<td>int (nullable)</td>
+<td><code>None</code></td>
+<td>Delete punches older than N days (<code>None</code> = keep forever).</td>
+</tr>
+<tr>
+<td><code>RETENTION_EVENT_LOG_DAYS</code></td>
+<td><code>FPA_RETENTION_EVENT_LOG_DAYS</code></td>
+<td>int (nullable)</td>
+<td><code>90</code></td>
+<td>Delete device event logs older than N days.</td>
+</tr>
+<tr>
+<td><code>RETENTION_COMMANDS_DAYS</code></td>
+<td><code>FPA_RETENTION_COMMANDS_DAYS</code></td>
+<td>int (nullable)</td>
+<td><code>90</code></td>
+<td>Delete finished commands older than N days.</td>
+</tr>
+<tr>
+<td><code>RETENTION_WEBHOOK_DELIVERIES_DAYS</code></td>
+<td><code>FPA_RETENTION_WEBHOOK_DELIVERIES_DAYS</code></td>
+<td>int (nullable)</td>
+<td><code>30</code></td>
+<td>Delete webhook deliveries older than N days.</td>
+</tr>
+<tr>
+<td><code>RETENTION_AUDIT_LOG_DAYS</code></td>
+<td><code>FPA_RETENTION_AUDIT_LOG_DAYS</code></td>
+<td>int (nullable)</td>
+<td><code>None</code></td>
+<td>Delete audit entries older than N days.</td>
+</tr>
+<tr>
+<td><code>AUDIT_LOG_ENABLED</code></td>
+<td><code>FPA_AUDIT_LOG_ENABLED</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Write AuditLog rows.</td>
+</tr>
+<tr>
+<td><code>LOG_REDACTION</code></td>
+<td><code>FPA_LOG_REDACTION</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Redact templates, tokens and keys from package log records.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="hooks">Hooks<a class="headerlink" href="#hooks" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Env var</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HOOKS</code></td>
+<td><code>FPA_HOOKS</code></td>
+<td>dict</td>
+<td><code>{}</code></td>
+<td><code>{event_name: ["dotted.callable", ...]}</code>; each is called as <code>hook(event, payload)</code>.</td>
+</tr>
+<tr>
+<td><code>HOOKS_ASYNC</code></td>
+<td><code>FPA_HOOKS_ASYNC</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Run hooks through the task backend.</td>
+</tr>
+<tr>
+<td><code>EVENTS_ON_COMMIT</code></td>
+<td><code>FPA_EVENTS_ON_COMMIT</code></td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Dispatch signals/hooks/webhooks after the surrounding transaction commits.</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
