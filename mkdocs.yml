@@ -1,0 +1,57 @@
+site_name: django-fingerprint-attendance
+site_description: Reusable Django + DRF engine for fingerprint attendance (ZKTeco ADMS/Push, pull, enrollment, sync, punches)
+repo_url: https://github.com/your-org/django-fingerprint-attendance
+edit_uri: edit/main/docs/
+strict: true
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle: {icon: material/brightness-7, name: Dark mode}
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle: {icon: material/brightness-4, name: Light mode}
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+
+nav:
+  - Home: index.md
+  - Getting started:
+      - Quickstart: quickstart.md
+      - ADMS device setup: adms-setup.md
+      - Pull mode: pull-mode.md
+  - Guides:
+      - Enrollment & desktop agent: agent.md
+      - Offline operation & catch-up: offline.md
+      - Calendar, holidays & schedules: calendar.md
+      - REST API: api.md
+      - Signals, hooks, webhooks, realtime: events.md
+      - Extending: extending.md
+      - Testing with the simulator: testing.md
+  - Reference:
+      - Configuration: configuration.md
+      - System checks: checks.md
+      - Protocol notes: protocol.md
+      - Management commands: commands.md
+  - Operations:
+      - Security & privacy: security.md
+      - Deployment: deployment.md
+      - Upgrading: upgrading.md
+      - Release checklist: release.md
+  - Changelog: changelog.md

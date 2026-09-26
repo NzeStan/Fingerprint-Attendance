@@ -1,0 +1,1 @@
+~DeviceName=SpeedFace-V5L,MAC=00:17:61:00:00:01,TransactionCount=10,~MaxAttLogCount=20,UserCount=3,FPCount=6,FWVersion=ZAM180-NF,PushVersion=Ver 2.4.1,FPVersion=12,~Platform=ZMM220_TFT,IPAddress=10.0.0.9

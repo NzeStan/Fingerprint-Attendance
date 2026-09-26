@@ -1,0 +1,41 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^tests/fixtures/
+      - id: end-of-file-fixer
+        exclude: ^tests/fixtures/
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: debug-statements
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: [--fix]
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.11.2
+    hooks:
+      - id: mypy
+        pass_filenames: false
+        args: []
+        additional_dependencies:
+          - django-stubs>=5.0
+          - djangorestframework-stubs>=3.15
+          - cryptography
+          - django-filter
+          - drf-spectacular
+          - channels
+          - celery
+          - holidays
+          - pytest
+  - repo: local
+    hooks:
+      - id: settings-docs
+        name: settings reference is up to date
+        entry: python scripts/gen_settings_docs.py
+        language: system
+        files: ^src/fingerprint_attendance/conf\.py$
+        pass_filenames: false

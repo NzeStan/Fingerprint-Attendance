@@ -1,0 +1,11 @@
+ID=11&Return=0&CMD=DATA
+ID=12&Return=-1&CMD=DATA
+ID=13&Return=0&CMD=INFO
+~DeviceName=MB460
+FWVersion=Ver 6.60 Apr 28 2016
+UserCount=25
+FPCount=40
+TransactionCount=1520
+FPVersion=10
+~MaxAttLogCount=10
+ID=bad&Return=0&CMD=DATA

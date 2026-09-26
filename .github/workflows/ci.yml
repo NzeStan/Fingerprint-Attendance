@@ -1,0 +1,110 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install ruff
+      - run: ruff check src tests scripts
+
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[all]" pytest pytest-django mypy django-stubs djangorestframework-stubs
+      - run: mypy
+
+  tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+        django: ["5.2"]
+        include:
+          - {os: ubuntu-latest, python: "3.12", django: "6.0"}
+          - {os: ubuntu-latest, python: "3.13", django: "6.0"}
+          - {os: ubuntu-latest, python: "3.14", django: "6.0"}
+          - {os: ubuntu-latest, python: "3.12", django: "6.1"}
+          - {os: ubuntu-latest, python: "3.13", django: "6.1"}
+          - {os: ubuntu-latest, python: "3.14", django: "6.1"}
+          - {os: windows-latest, python: "3.14", django: "6.1"}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          allow-prereleases: true
+      - run: pip install "django~=${{ matrix.django }}.0" -e ".[all]" pytest pytest-django pytest-cov daphne
+      - run: pytest --cov --cov-report=xml --cov-fail-under=90
+      - uses: actions/upload-artifact@v4
+        if: matrix.python == '3.12' && matrix.django == '6.1'
+        with:
+          name: coverage
+          path: coverage.xml
+
+  postgres:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[all]" pytest pytest-django "psycopg[binary]"
+      - run: pytest
+        env:
+          TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+
+  minimal:
+    name: core install (no extras)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e . pytest pytest-django
+      - run: pytest tests/test_conf.py tests/test_models_crypto.py tests/test_adms_views.py
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install build twine
+      - run: python -m build
+      - run: twine check dist/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
