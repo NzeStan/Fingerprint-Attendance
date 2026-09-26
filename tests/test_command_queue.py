@@ -67,7 +67,7 @@ def test_sensitive_commands_stored_redacted(make_device, make_enrollee):
     cmd = services.queue_command(device, "add_template",
                                  {"template_id": template.pk, "checksum": template.checksum})
     assert "rendered at send time" in cmd.command_string
-    [(cid, text)] = services.fetch_commands(device)
+    [(_cid, text)] = services.fetch_commands(device)
     assert "TMP=" in text and "UVFR" in text  # base64 of QQQ is UVFR
     cmd.refresh_from_db()
     assert "UVFR" not in cmd.command_string

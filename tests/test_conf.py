@@ -76,7 +76,7 @@ def test_unknown_setting_raises():
 
 def test_dict_values_are_cast(fpa):
     fpa(DEVICE_OFFLINE_AFTER=120, ALLOWED_FINGER_INDEXES=["1", "6"])
-    assert settings.DEVICE_OFFLINE_AFTER == timedelta(minutes=2)
+    assert timedelta(minutes=2) == settings.DEVICE_OFFLINE_AFTER
     assert settings.ALLOWED_FINGER_INDEXES == [1, 6]
 
 

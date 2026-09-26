@@ -109,4 +109,4 @@ def simulator(db: Any) -> Callable[..., ADMSDeviceSimulator]:
 
 def local(*args: int) -> datetime:
     """Naive device-local datetime helper."""
-    return datetime(*args)  # noqa: DTZ001
+    return datetime(*args)

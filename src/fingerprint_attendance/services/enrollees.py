@@ -188,10 +188,9 @@ def link_unknown_punches(enrollee: Any) -> int:
     from ..processing.boundaries import get_day_boundary
 
     qs = Punch.objects.filter(raw_pin=enrollee.device_pin, enrollee__isnull=True)
-    if enrollee.created_at:
-        # never attach punches from before a previous holder's time if PINs are reused
-        if settings.PIN_REUSE_ALLOWED:
-            qs = qs.filter(punched_at__gte=enrollee.created_at)
+    # never attach punches from before a previous holder's time if PINs are reused
+    if enrollee.created_at and settings.PIN_REUSE_ALLOWED:
+        qs = qs.filter(punched_at__gte=enrollee.created_at)
     punches = list(qs.values_list("punched_at", flat=True))
     updated = qs.update(enrollee=enrollee)
     if updated:

@@ -1,6 +1,9 @@
 site_name: django-fingerprint-attendance
 site_description: Reusable Django + DRF engine for fingerprint attendance (ZKTeco ADMS/Push, pull, enrollment, sync, punches)
-repo_url: https://github.com/your-org/django-fingerprint-attendance
+site_url: https://nzestan.github.io/Fingerprint-Attendance/
+site_author: Ifeanyi Nnamani
+repo_url: https://github.com/NzeStan/Fingerprint-Attendance
+repo_name: NzeStan/Fingerprint-Attendance
 edit_uri: edit/main/docs/
 strict: true
 

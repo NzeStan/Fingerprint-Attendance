@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import importlib.util
 import os
+from typing import Any
 from urllib.parse import urlparse
 
 HAS_SPECTACULAR = importlib.util.find_spec("drf_spectacular") is not None
@@ -36,7 +37,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "tests.urls"
 
-DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ":memory:"}}
+DATABASES: dict[str, dict[str, Any]] = {
+    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ":memory:"},
+}
 if os.environ.get("TEST_DATABASE_URL"):  # e.g. postgres://user:pw@host:5432/db (CI)
     _url = urlparse(os.environ["TEST_DATABASE_URL"])
     DATABASES["default"] = {

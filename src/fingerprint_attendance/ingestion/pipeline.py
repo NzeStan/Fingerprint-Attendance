@@ -203,7 +203,8 @@ def _load_history(fresh: list[PunchCandidate], boundary: Any, window: timedelta,
     enrollee_by_pin = {c.pin: c.enrollee for c in fresh}
     starts, ends = [], []
     for c in fresh:
-        assert c.work_date is not None and c.punched_at is not None
+        assert c.work_date is not None
+        assert c.punched_at is not None
         if need_days:
             start, end = boundary.window(c.work_date, c.enrollee)
             starts.append(start)
@@ -246,8 +247,9 @@ def _update_last_punch(created: list[Any]) -> None:
     for p in created:
         if p.device_id and (p.device_id not in latest or p.punched_at > latest[p.device_id]):
             latest[p.device_id] = p.punched_at
-    from ..models import Device
     from django.db.models import Q
+
+    from ..models import Device
 
     for device_id, when in latest.items():
         Device.objects.filter(pk=device_id).filter(

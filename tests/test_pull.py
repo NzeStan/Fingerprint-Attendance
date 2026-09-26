@@ -40,7 +40,7 @@ def test_import_uses_marker_and_same_pipeline(pull_device):
     term = terminal(pull_device)
     term.punches = [PulledPunch("1", local(2026, 1, 5, 8), status="0"),
                     PulledPunch("1", local(2026, 1, 5, 17), status="1")]
-    term.clock = datetime.now()  # noqa: DTZ005
+    term.clock = datetime.now()
     result = import_attendance(pull_device)
     assert result.created_count == 2
     pull_device.refresh_from_db()
@@ -161,7 +161,7 @@ class FakeZKConn:
     def __getattr__(self, name):
         def call(*args, **kwargs):
             self.calls.append((name, args, kwargs))
-            return None
+            return
         return call
 
     def get_users(self):
@@ -212,7 +212,7 @@ def fake_zk(monkeypatch):
     finger_mod = types.ModuleType("zk.finger")
     finger_mod.Finger = lambda uid, fid, valid, template: ("finger", uid, fid, template)
     user_mod = types.ModuleType("zk.user")
-    user_mod.User = lambda *a: ("user",) + a
+    user_mod.User = lambda *a: ("user", *a)
     monkeypatch.setitem(sys.modules, "zk", zk_module)
     monkeypatch.setitem(sys.modules, "zk.finger", finger_mod)
     monkeypatch.setitem(sys.modules, "zk.user", user_mod)

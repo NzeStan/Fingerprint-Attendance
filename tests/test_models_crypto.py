@@ -154,7 +154,7 @@ def test_normalize_algorithm(raw, expected):
 
 def test_employee_field_deconstruct_has_no_target():
     field = EmployeeOneToOneField(related_name="x")
-    name, path, args, kwargs = field.deconstruct()
+    _name, path, _args, kwargs = field.deconstruct()
     assert path == "fingerprint_attendance.fields.EmployeeOneToOneField"
     assert "to" not in kwargs
     assert field.remote_field.model == "testapp.Employee"

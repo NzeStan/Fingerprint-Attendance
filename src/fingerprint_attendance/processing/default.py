@@ -35,8 +35,9 @@ class FirstInLastOutProcessor(BaseAttendanceProcessor):
 
         start, end = self.boundary.window(work_date, enrollee)
         # include punches whose adjusted time may move them into this day
+        span = end - start
         raw = list(Punch.objects.effective().filter(enrollee=enrollee)
-                   .filter(punched_at__gte=start - (end - start), punched_at__lt=end + (end - start))
+                   .filter(punched_at__gte=start - span, punched_at__lt=end + span)
                    .order_by("punched_at", "id"))
         adjustments: dict[int, list[Any]] = {}
         for adj in PunchAdjustment.objects.filter(punch__in=raw).order_by("created_at", "id"):

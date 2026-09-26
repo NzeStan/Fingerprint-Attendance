@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone as dt_tz
+from datetime import datetime, timedelta
+from datetime import timezone as dt_tz
 
 import pytest
 from django.utils import timezone

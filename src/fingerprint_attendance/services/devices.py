@@ -434,8 +434,8 @@ def device_health(device: Any, *, server_count: int | None = None,
 
 
 def health_summary() -> dict[str, Any]:
-    from ..models import Device, DeviceEnrolleeSync, Enrollee, Punch
     from ..constants import SyncStatus
+    from ..models import Device, DeviceEnrolleeSync, Enrollee, Punch
 
     devices = list(Device.objects.annotate(
         server_count=Count("punches"),

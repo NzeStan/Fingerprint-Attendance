@@ -73,7 +73,8 @@ def adms_endpoint(view: Callable[[HttpRequest, ADMSContext], HttpResponse] | Non
         ip = client_ip(request, settings.ADMS_TRUSTED_PROXY_IPS or [])
         if not ratelimit.allow(f"adms:{serial}", settings.ADMS_RATE_LIMIT):
             return text("rate limited", 429)
-        token = (params.get(settings.ADMS_TOKEN_PARAM) or str(request.headers.get("X-FPA-Device-Token") or "")
+        header_token = str(request.headers.get("X-FPA-Device-Token") or "")
+        token = (params.get(settings.ADMS_TOKEN_PARAM) or header_token
                  or adapter.get_param(params, "pushcommkey"))
         try:
             device = device_service.resolve_adms_device(serial, ip=ip, token=token)

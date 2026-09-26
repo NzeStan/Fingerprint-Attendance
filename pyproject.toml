@@ -10,7 +10,8 @@ readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
 requires-python = ">=3.10"
-authors = [{ name = "django-fingerprint-attendance contributors" }]
+authors = [{ name = "Ifeanyi Nnamani" }]
+maintainers = [{ name = "Ifeanyi Nnamani" }]
 keywords = ["django", "attendance", "fingerprint", "biometric", "zkteco", "adms", "iclock", "time-clock"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -67,10 +68,10 @@ lint = ["ruff>=0.6", "mypy>=1.11", "django-stubs>=5.0", "djangorestframework-stu
 docs = ["mkdocs>=1.6,<2", "mkdocs-material>=9.5"]
 
 [project.urls]
-Homepage = "https://github.com/your-org/django-fingerprint-attendance"
-Documentation = "https://your-org.github.io/django-fingerprint-attendance/"
-Changelog = "https://github.com/your-org/django-fingerprint-attendance/blob/main/CHANGELOG.md"
-Issues = "https://github.com/your-org/django-fingerprint-attendance/issues"
+Homepage = "https://github.com/NzeStan/Fingerprint-Attendance"
+Documentation = "https://nzestan.github.io/Fingerprint-Attendance/"
+Changelog = "https://github.com/NzeStan/Fingerprint-Attendance/blob/main/CHANGELOG.md"
+Issues = "https://github.com/NzeStan/Fingerprint-Attendance/issues"
 
 [tool.hatch.version]
 path = "src/fingerprint_attendance/__init__.py"
@@ -114,10 +115,10 @@ exclude_also = [
 line-length = 100
 target-version = "py310"
 src = ["src", "tests"]
-extend-exclude = ["src/fingerprint_attendance/migrations"]
+extend-exclude = ["src/fingerprint_attendance/migrations", "tests/testapp/migrations"]
 
 [tool.ruff.lint]
-select = ["E", "F", "W", "I", "B", "UP", "DJ", "SIM", "RUF", "S", "C4", "PIE", "PT", "RET", "TID"]
+select = ["E", "F", "W", "I", "B", "UP", "DJ", "SIM", "RUF", "S", "C4", "PIE", "PT", "RET"]
 ignore = [
     "S101",    # assert is fine in tests
     "S311",    # random is not used for crypto
@@ -129,7 +130,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**" = ["S", "B011", "PT011", "RUF001"]
+"tests/**" = ["S", "B011", "PT011", "PT018", "RUF001"]
 "example_project/**" = ["S", "DJ"]
 "noxfile.py" = ["S"]
 

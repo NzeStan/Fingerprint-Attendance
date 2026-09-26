@@ -94,21 +94,21 @@ Punches flow in on their own. Read them from `Punch`, `GET /api/.../punches/`, o
 
 ## Documentation
 
-The full docs live in [`docs/`](docs/index.md) (MkDocs Material):
+The full docs live in [`docs/`](https://github.com/NzeStan/Fingerprint-Attendance/blob/main/docs/index.md) (MkDocs Material):
 
-- [Configuration reference](docs/configuration.md): every setting, env var, type and default
-- [ADMS device setup](docs/adms-setup.md) and [protocol notes](docs/protocol.md)
-- [Pull mode](docs/pull-mode.md)
-- [Desktop enrollment agent contract and example client](docs/agent.md)
-- [Offline operation and catch-up](docs/offline.md)
-- [Extending](docs/extending.md): processors, sync strategies, resolvers, adapters, serializers
-- [Signals, hooks, webhooks and realtime](docs/events.md)
-- [Calendar, holidays, leave and schedules](docs/calendar.md)
-- [REST API](docs/api.md)
-- [Security and privacy](docs/security.md)
-- [Deployment](docs/deployment.md) and [upgrading](docs/upgrading.md)
+- [Configuration reference](https://github.com/NzeStan/Fingerprint-Attendance/blob/main/docs/configuration.md): every setting, env var, type and default
+- [ADMS device setup](https://github.com/NzeStan/Fingerprint-Attendance/blob/main/docs/adms-setup.md) and [protocol notes](https://github.com/NzeStan/Fingerprint-Attendance/blob/main/docs/protocol.md)
+- [Pull mode](https://github.com/NzeStan/Fingerprint-Attendance/blob/main/docs/pull-mode.md)
+- [Desktop enrollment agent contract and example client](https://github.com/NzeStan/Fingerprint-Attendance/blob/main/docs/agent.md)
+- [Offline operation and catch-up](https://github.com/NzeStan/Fingerprint-Attendance/blob/main/docs/offline.md)
+- [Extending](https://github.com/NzeStan/Fingerprint-Attendance/blob/main/docs/extending.md): processors, sync strategies, resolvers, adapters, serializers
+- [Signals, hooks, webhooks and realtime](https://github.com/NzeStan/Fingerprint-Attendance/blob/main/docs/events.md)
+- [Calendar, holidays, leave and schedules](https://github.com/NzeStan/Fingerprint-Attendance/blob/main/docs/calendar.md)
+- [REST API](https://github.com/NzeStan/Fingerprint-Attendance/blob/main/docs/api.md)
+- [Security and privacy](https://github.com/NzeStan/Fingerprint-Attendance/blob/main/docs/security.md)
+- [Deployment](https://github.com/NzeStan/Fingerprint-Attendance/blob/main/docs/deployment.md) and [upgrading](https://github.com/NzeStan/Fingerprint-Attendance/blob/main/docs/upgrading.md)
 
-A complete [`example_project/`](example_project/) shows a custom employee model, Celery,
+A complete [`example_project/`](https://github.com/NzeStan/Fingerprint-Attendance/tree/main/example_project) shows a custom employee model, Celery,
 Channels, a custom attendance processor and a webhook receiver.
 
 ## Development

@@ -163,9 +163,9 @@ class AbstractDevice(TimeStampedModel):
     def is_online(self) -> bool:
         from ..conf import settings
 
-        return bool(
-            self.last_seen_at and timezone.now() - self.last_seen_at <= settings.DEVICE_OFFLINE_AFTER
-        )
+        if not self.last_seen_at:
+            return False
+        return bool(timezone.now() - self.last_seen_at <= settings.DEVICE_OFFLINE_AFTER)
 
     @property
     def offline_duration(self) -> timedelta | None:
@@ -524,18 +524,18 @@ class AbstractPunch(TimeStampedModel):
     def __str__(self) -> str:
         return f"{self.raw_pin} @ {self.punched_at:%Y-%m-%d %H:%M:%S} ({self.state})"
 
+    def save(self, *args: Any, **kwargs: Any) -> None:
+        if self.pk is not None and not getattr(self, "_allow_update", False):
+            raise ImmutableRecordError(
+                "Punches are immutable; record a PunchAdjustment instead.")
+        super().save(*args, **kwargs)
+
     @property
     def flag_list(self) -> list[str]:
         return decode_flags(self.flags)
 
     def has_flag(self, flag: str) -> bool:
         return f"|{flag}|" in (self.flags or "")
-
-    def save(self, *args: Any, **kwargs: Any) -> None:
-        if self.pk is not None and not getattr(self, "_allow_update", False):
-            raise ImmutableRecordError(
-                "Punches are immutable; record a PunchAdjustment instead.")
-        super().save(*args, **kwargs)
 
 
 class AbstractPunchAdjustment(TimeStampedModel):

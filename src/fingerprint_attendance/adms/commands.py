@@ -115,7 +115,8 @@ def _template_b64(payload: dict[str, Any]) -> tuple[str, Any]:
 
     template_id = payload.get("template_id")
     try:
-        template = FingerprintTemplate.objects.select_related("enrollee").get(pk=int(template_id or 0))
+        template = (FingerprintTemplate.objects.select_related("enrollee")
+                    .get(pk=int(template_id or 0)))
     except FingerprintTemplate.DoesNotExist:
         raise CommandBuildError(f"template {template_id} no longer exists") from None
     if payload.get("checksum") and payload["checksum"] != template.checksum:

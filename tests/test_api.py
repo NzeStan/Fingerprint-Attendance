@@ -330,7 +330,7 @@ def test_session_api_and_agent_contract(api, make_enrollee, make_device):
 def test_agent_start_and_cancel(api, make_enrollee, fpa):
     fpa(AGENT_CAN_START_SESSIONS=True)
     enrollee = make_enrollee(pin="321")
-    agent, key = services.create_agent("desk", algorithm_version="10")
+    _agent, key = services.create_agent("desk", algorithm_version="10")
     client = APIClient()
     client.credentials(HTTP_AUTHORIZATION=f"Agent {key}")
     started = client.post(f"{V1}/agent/sessions/", {"enrollee": "321", "fingers": [1]},

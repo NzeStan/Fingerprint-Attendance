@@ -11,8 +11,10 @@ class FingerprintAttendanceConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
 
     def ready(self) -> None:
-        from . import checks  # noqa: F401  (registers system checks)
-        from . import receivers  # noqa: F401  (connects internal signal receivers)
+        from . import (
+            checks,  # noqa: F401  (registers system checks)
+            receivers,  # noqa: F401  (connects internal signal receivers)
+        )
         from .utils.logging import install_redaction
 
         install_redaction()

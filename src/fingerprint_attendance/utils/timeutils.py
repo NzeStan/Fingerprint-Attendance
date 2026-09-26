@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import contextlib
 import functools
 from datetime import date, datetime, timedelta, timezone
 from typing import TYPE_CHECKING, Any
@@ -38,10 +39,9 @@ def default_device_zone() -> ZoneInfo:
 
 def device_zone(device: Device | None) -> ZoneInfo:
     if device is not None and device.timezone:
-        try:
+        # an invalid per-device value must not break ingestion
+        with contextlib.suppress(Exception):
             return get_zone(device.timezone)
-        except Exception:  # an invalid per-device value must not break ingestion
-            pass
     return default_device_zone()
 
 

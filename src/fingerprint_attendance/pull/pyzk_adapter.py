@@ -3,6 +3,7 @@ works without it."""
 
 from __future__ import annotations
 
+import contextlib
 from collections.abc import Iterator
 from datetime import datetime
 from typing import Any
@@ -50,10 +51,8 @@ class PyZKPullAdapter(BasePullAdapter):
 
     def disconnect(self) -> None:
         if self.conn is not None:
-            try:
+            with contextlib.suppress(Exception):  # best effort
                 self.conn.enable_device()
-            except Exception:  # noqa: S110 - best effort
-                pass
             try:
                 self.conn.disconnect()
             finally:
@@ -90,10 +89,8 @@ class PyZKPullAdapter(BasePullAdapter):
             info.punch_count, info.punch_capacity = c.records, getattr(c, "rec_cap", None)
         except Exception:  # noqa: S110
             pass
-        try:
+        with contextlib.suppress(Exception):
             info.device_time = c.get_time()
-        except Exception:  # noqa: S110
-            pass
         return info
 
     def get_users(self) -> list[PulledUser]:
